@@ -3,7 +3,7 @@
 <!-- What might they have a hard time understanding -->
 # Logs Analysis
 
-Logs Anlysisis (**logs-analysis.py**) is a python2 script that runs three queries and displays the information directly in the terminal.
+Logs Anlysisis (**logs-analysis.py**) is a python2 script that runs three queries and displays the information directly in the standard output.
 
 ## Output
 
@@ -65,7 +65,7 @@ $ ORDER BY not_found DESC;
 
 ## Running the script
 
-When all the prerequits are fullfilled you can simply run the script like so:
+When all the prerequisite are fulfilled you can simply run the script like so:
 ```
 $ python logs-analysis.py 
 ```
