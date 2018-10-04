@@ -82,9 +82,9 @@ Namely:
 
 Each of these functions consits of the same steps.
 1. Connecting to the database
-2. Storing the SQL query in a variable named: ```query```
+2. Storing the SQL query in the variable: ```query```
 3. Execute the query against the connected database
-4. Store the result in the variable ```results```
+4. Store the result in the variable: ```results```
 5. A for loop iterates over the results printing to the screen the result formatted as defined.
 
 
