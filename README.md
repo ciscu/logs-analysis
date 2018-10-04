@@ -7,11 +7,12 @@ Logs Anlysisis (**logs-analysis.py**) is a python2 script that runs three querie
 
 ## Output
 
-Based on the data in the news database it will output following Analytics
+Based on the data in the news database it will output following Analytics:
 1. The 3 most popular articles.
 2. The 4 most popular authors.
 3. Days on which more than 1% of requests lead to errors.
 
+Output can be found in the **output.txt** file
 
 ## Prerequisits
 
