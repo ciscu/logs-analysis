@@ -3,7 +3,7 @@
 <!-- What might they have a hard time understanding -->
 # Logs Analysis
 
-Logs Anlysisis (**logs-analysis.py**) is a python2 script that runs three queries and displays the information directly in the standard output.
+Logs Anlysisis (**logs-analysis.py**) is a python2 script that runs three queries and displays the information directly to the standard output.
 
 ## Output
 
@@ -16,7 +16,7 @@ Output can be found in the **output.txt** file
 
 ## Prerequisits
 
-In order to run the queries, 3 views most be created in the __news__ database before running the **logs-analysis.py** file
+In order to run the queries, 3 views must be created in the __news__ database before running the **logs-analysis.py** file
 
 ### Log into the database
 
