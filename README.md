@@ -1,13 +1,13 @@
 <!-- What steps need to be taken -->
 <!-- What should the user already have installed -->
 <!-- What might they have a hard time understanding -->
-# Logs Anlysis
+# Logs Analysis
 
 Logs Anlysisis (**logs-analysis.py**) is a python2 script that runs three queries and displays the information directly in the terminal.
 
 ## Output
 
-Based on the data in the news database it will output following Analytics:
+Based on the data in the __news__ database it will output following analytics:
 1. The 3 most popular articles.
 2. The 4 most popular authors.
 3. Days on which more than 1% of requests lead to errors.
@@ -18,7 +18,7 @@ Output can be found in the **output.txt** file
 
 In order to run the queries, 3 views most be created in the __news__ database before running the **logs-analysis.py** file
 
-### Log in the database
+### Log into the database
 
 ```
 $ psql news
@@ -26,7 +26,7 @@ $ psql news
 
 ### Creating the views
 
-#### **errors** view
+#### 1. **errors** view
 
 This view aggregates the "404 NOT FOUND" status codes per day from the log table.
 
@@ -39,7 +39,7 @@ $ WHERE status = '404 NOT FOUND'
 $ GROUP BY time::date
 ```
 
-#### **total_hits** views
+#### 2. **total_hits** views
 
 This view aggregates all the hits on a day per day basis
 
@@ -51,7 +51,7 @@ $ FROM log
 $ GROUP BY time::date;
 ```
 
-#### **error_stats** view
+#### 3. **error_stats** view
 
 This view aggregates the previous views (errors and total_hits) to calculate the percentage of failed attempts to reach a page.
 
@@ -65,7 +65,7 @@ $ ORDER BY not_found DESC;
 
 ## Running the script
 
-When all the prerequits are fullfilled you can simply run the script like so
+When all the prerequits are fullfilled you can simply run the script like so:
 ```
 $ python logs-analysis.py 
 ```
