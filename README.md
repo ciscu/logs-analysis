@@ -41,7 +41,7 @@ $ GROUP BY time::date
 
 #### 2.2. **total_hits** views
 
-This view aggregates all the hits on a day per day basis
+This view aggregates all the hits on a day per day basis.
 
 RUN THIS IN THE TERMINAL: 
 ```
@@ -53,8 +53,9 @@ $ GROUP BY time::date;
 
 #### 2.3. **error_stats** view
 
-This view aggregates the previous views (errors and total_hits) to calculate the percentage of failed attempts to reach a page.
+This view combines the previous views (errors and total_hits) to calculate the percentage of failed attempts to reach a page.
 
+RUN THIS IN THE TERMINAL:
 ```
 $ CREATE VIEW error_stats AS
 $ SELECT total_hits.time, total_hits.hits, errors.not_found, round(((not_found/hits::decimal)*100), 1) as perc
