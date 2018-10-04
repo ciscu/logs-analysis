@@ -18,15 +18,15 @@ Output can be found in the **output.txt** file.
 
 In order to run the queries, 3 views must be created in the __news__ database before running the **logs-analysis.py** file
 
-### Log into the database
+### 1. Log into the database
 
 ```
 $ psql news
 ```
 
-### Creating the views
+### 2. Creating the views
 
-#### 1. **errors** view
+#### 2.1. **errors** view
 
 This view aggregates the "404 NOT FOUND" status codes per day from the log table.
 
@@ -39,7 +39,7 @@ $ WHERE status = '404 NOT FOUND'
 $ GROUP BY time::date
 ```
 
-#### 2. **total_hits** views
+#### 2.2. **total_hits** views
 
 This view aggregates all the hits on a day per day basis
 
@@ -51,7 +51,7 @@ $ FROM log
 $ GROUP BY time::date;
 ```
 
-#### 3. **error_stats** view
+#### 2.3. **error_stats** view
 
 This view aggregates the previous views (errors and total_hits) to calculate the percentage of failed attempts to reach a page.
 
