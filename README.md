@@ -3,7 +3,7 @@
 <!-- What might they have a hard time understanding -->
 # Logs Analysis
 
-Logs Anlysisis (**logs-analysis.py**) is a python2 script that runs three queries and displays the information directly to the standard output.
+Logs Anlysisis (**logs-analysis.py**) is a python2 script that runs three queries and displays the result directly to the standard output.
 
 ## Output
 
@@ -12,7 +12,7 @@ Based on the data in the __news__ database it will output following analytics:
 2. The 4 most popular authors.
 3. Days on which more than 1% of requests lead to errors.
 
-Output can be found in the **output.txt** file
+Output can be found in the **output.txt** file.
 
 ## Prerequisits
 
