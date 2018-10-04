@@ -1,3 +1,5 @@
+#!/usr/bin/env python2
+
 import psycopg2
 
  
@@ -16,7 +18,7 @@ import psycopg2
 dbname = "news"
 
 # Task 1
-def mostPopularArticles(amount):	
+def mostPopularArticles():	
 	# Connect to the database
 	db = psycopg2.connect(dbname=dbname)
 	c = db.cursor()
@@ -24,13 +26,11 @@ def mostPopularArticles(amount):
 	#Query to be executed against the database
 	query = """
 	SELECT title, hits
-	FROM articles, (SELECT count(path) as hits, path as ref FROM log GROUP BY path ORDER BY hits DESC LIMIT {} OFFSET 1) as topArticles
+	FROM articles, (SELECT count(path) as hits, path as ref FROM log GROUP BY path ORDER BY hits DESC LIMIT 3 OFFSET 1) as page_visit_count
 	WHERE ref like '%' || slug || '%'
 	ORDER BY hits DESC;
 	"""
-	# Format the query with function argument to specify the amount of lines of output
-	query = query.format(amount)
-	
+
 	#Run the query against the database
 	c.execute(query)
 	
@@ -38,7 +38,7 @@ def mostPopularArticles(amount):
 	results = c.fetchall()
 
 	#Loop over the results and print them out in the format specified
-	print("The {} most popular articles:").format(amount)
+	print("The 3 most popular articles:")
 	for title, hits in results:
 		print("{} - {} views").format(title, hits)
 
@@ -47,7 +47,7 @@ def mostPopularArticles(amount):
 	print
 
 # Task 2
-def mostPopularAuthors(amount):
+def mostPopularAuthors():
 	# Connect to the database
 	db = psycopg2.connect(dbname=dbname)
 	c = db.cursor()
@@ -55,16 +55,12 @@ def mostPopularAuthors(amount):
 	#Query to be executed against the database
 	query = """
 	SELECT authors.name, sum(hits) as Total
-	FROM articles, authors ,(SELECT count(path) as hits, path as ref FROM log GROUP BY path ORDER BY hits DESC LIMIT {} OFFSET 1) as topThree
+	FROM articles, authors ,(SELECT count(path) as hits, path as ref FROM log GROUP BY path ORDER BY hits DESC LIMIT 4 OFFSET 1) as topThree
 	WHERE authors.id = articles.author
 	AND ref like '%' || slug || '%'
 	GROUP BY authors.name
 	ORDER BY Total DESC;
 	"""
-
-	# Format the query with function argument to specify the amount of lines of output
-	query = query.format(amount)
-	
 	#Run the query against the database
 	c.execute(query)
 
@@ -72,7 +68,7 @@ def mostPopularAuthors(amount):
 	results = c.fetchall()
 	
 	#Loop over the results and print them out in the format specified
-	print("The {} most popular Authors:").format(amount)
+	print("The 4 most popular Authors:")
 	for name, hits in results:
 		print("{} - {} views").format(name, hits)
 	
@@ -109,8 +105,8 @@ def failPercentage():
 	db.close()
 
 def main():
-	mostPopularArticles(3)
-	mostPopularAuthors(4)
+	mostPopularArticles()
+	mostPopularAuthors()
 	failPercentage()
 
 if __name__ == "__main__":
