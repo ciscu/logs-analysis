@@ -1,11 +1,6 @@
-<!-- What steps need to be taken -->
-<!-- What should the user already have installed -->
-<!-- What might they have a hard time understanding -->
 # Logs Analysis
 
-Logs Anlysisis (**logs-analysis.py**) is a python2 script that runs three queries and displays the result directly to the standard output.
-
-## Output
+## introduction
 
 Based on the data in the __news__ database it will output following analytics:
 1. The 3 most popular articles.
@@ -14,19 +9,38 @@ Based on the data in the __news__ database it will output following analytics:
 
 Output can be found in the **output.txt** file.
 
-## Prerequisits
+## Prerequisites
 
-In order to run the queries, 3 views must be created in the __news__ database before running the **logs-analysis.py** file
+Here is a list of what is needed in order to run log-analysis.py.
 
-### 1. Log into the database
+### Software
 
+#### Using the Vagrant VM
+
+#### Manual setup
+
+The script requires following software to be installed:
+* Python 2.7
+* PostgreSQL
+
+### Importing the database
+
+If you have not imported the database in PostgreSQL run this code in your terminal:
+```
+psql -d newsdata.sql
+```
+
+### Connecting to the database
 ```
  psql news
 ```
+### Connecting to the database
 
-### 2. Creating the views
+### Views
 
-#### 2.1. **errors** view
+In order to run some of the queries 3 views must be created.
+
+#### **errors** view
 
 This view aggregates the "404 NOT FOUND" status codes per day from the log table.
 
@@ -39,7 +53,7 @@ WHERE status = '404 NOT FOUND'
 GROUP BY time::date
 ```
 
-#### 2.2. **total_hits** views
+#### **total_hits** views
 
 This view aggregates all the hits on a day per day basis.
 
@@ -51,7 +65,7 @@ FROM log
 GROUP BY time::date;
 ```
 
-#### 2.3. **error_stats** view
+#### **error_stats** view
 
 This view combines the previous views (errors and total_hits) to calculate the percentage of failed attempts to reach a page.
 
@@ -63,28 +77,5 @@ FROM total_hits, errors
 WHERE total_hits.time = errors.time
 ORDER BY not_found DESC;
 ```
-
-## Running the script
-
-When all the prerequisite are fulfilled you can simply run the script like so:
-```
-python logs-analysis.py 
-```
-
-## Under the hood
-
-If you look into the script you will see that the 3 queries are run in seperate functions
-
-Namely:
-1. mostPopularArticles()
-2. mostPopularAuthors()
-3. failPercentage()
-
-Each of these functions consits of the same steps.
-1. Connecting to the database
-2. Storing the SQL query in the variable: ```query```
-3. Execute the query against the connected database
-4. Store the result in the variable: ```results```
-5. A for loop iterates over the results printing to the screen the result formatted as defined.
 
 
