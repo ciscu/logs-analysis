@@ -58,14 +58,15 @@ def mostPopularAuthors():
     FROM articles, authors,
         (SELECT count(path) as hits, path as ref
         FROM log
+        WHERE status = '200 OK'
         GROUP BY path
         ORDER BY hits DESC
-        LIMIT 4
-        OFFSET 1) as topThree
+        OFFSET 1) as topAricles
     WHERE authors.id = articles.author
     AND ref like '%' || slug || '%'
     GROUP BY authors.name
-    ORDER BY Total DESC;
+    ORDER BY Total DESC
+    LIMIT 4;
     """
     # Run the query against the database
     c.execute(query)
