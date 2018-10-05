@@ -3,16 +3,32 @@
 import psycopg2
 
 # Database Name
-dbname = "news"
+DBNAME = "news"
+
+
+def connect():
+    """
+    Create a connection to the database, defined by DBNAME,
+    and return the database connection and cursor.
+
+    Returns:
+    db, c - a tuple. The first element is a connection to the database.
+    The second element is a cursor for the database.
+    """
+    try:
+        db = psycopg2.connect(dbname=DBNAME)  # Connect to database
+        c = db.cursor()  # Create cursor
+        return db, c
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
 
 
 # Task 1
-def mostPopularArticles():
-    '''Prints out the 3 most popular articles of all time.'''
-
-    # Connect to the database
-    db = psycopg2.connect(dbname=dbname)
-    c = db.cursor()
+def mostPopularArticles((db, c)):
+    '''
+    Queries the database for the 3 most popular articles.
+    Prints them out line by line displaying title and views.
+    '''
 
     # Query to be executed against the database
     query = """
@@ -45,12 +61,8 @@ def mostPopularArticles():
 
 
 # Task 2
-def mostPopularAuthors():
+def mostPopularAuthors((db, c)):
     '''Prints out the 4 most popular authors of all time.'''
-
-    # Connect to the database
-    db = psycopg2.connect(dbname=dbname)
-    c = db.cursor()
 
     # Query to be executed against the database
     query = """
@@ -58,7 +70,7 @@ def mostPopularAuthors():
     FROM articles, authors,
         (SELECT count(path) as hits, path as ref
         FROM log
-        WHERE status = '200 OK'
+        WHERE status = '200 OK' --  Only query succesfull connections
         GROUP BY path
         ORDER BY hits DESC
         OFFSET 1) as topAricles
@@ -85,12 +97,8 @@ def mostPopularAuthors():
 
 
 # Task 3
-def failPercentage():
+def failPercentage((db, c)):
     '''Prints out on which  more than 1% of requests lead to errors?'''
-
-    # Connect to the database
-    db = psycopg2.connect(dbname=dbname)
-    c = db.cursor()
 
     # Query to be executed against the database
     query = """
@@ -115,9 +123,9 @@ def failPercentage():
 
 
 def main():
-    mostPopularArticles()
-    mostPopularAuthors()
-    failPercentage()
+    mostPopularArticles(connect())
+    mostPopularAuthors(connect())
+    failPercentage(connect())
 
 
 if __name__ == "__main__":
