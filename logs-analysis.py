@@ -27,7 +27,7 @@ def connect():
 def mostPopularArticles((db, c)):
     '''
     Queries the database for the 3 most popular articles.
-    Prints them out line by line displaying title and views.
+    Prints line by line, formating: title and views.
     '''
 
     # Query to be executed against the database
@@ -62,8 +62,10 @@ def mostPopularArticles((db, c)):
 
 # Task 2
 def mostPopularAuthors((db, c)):
-    '''Prints out the 4 most popular authors of all time.'''
-
+    '''
+    Queries the database for the 4 most popular authors.
+    Prints line by line, formating: author, views.
+    '''
     # Query to be executed against the database
     query = """
     SELECT authors.name, sum(hits) as Total
@@ -98,7 +100,10 @@ def mostPopularAuthors((db, c)):
 
 # Task 3
 def failPercentage((db, c)):
-    '''Prints out on which  more than 1% of requests lead to errors?'''
+    '''
+    Queries the database for dates where the error percentrange above 1.
+    Prints line by line, formating: date, percentage.
+    '''
 
     # Query to be executed against the database
     query = """
