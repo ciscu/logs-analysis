@@ -2,26 +2,14 @@
 
 import psycopg2
 
-
-# 1. What are the most popular three articles of all time? Which articles have
-# been accessed the most? Present this information as a sorted list with the
-# most popular article at the top.
-# "Princess Shellfish Marries Prince Handsome" - 1201 views
-# "Baltimore Ravens Defeat Rhode Island Shoggoths" - 915 views
-# "Political Scandal Ends In Political Scandal" - 553 views
-
-
-# 2. Who are the most popular article authors of all time?
-
-# 3. On which days did more than 1% of requests lead to errors?
-
-
 # Database Name
 dbname = "news"
 
 
 # Task 1
 def mostPopularArticles():
+    '''Prints out the 3 most popular articles of all time.'''
+
     # Connect to the database
     db = psycopg2.connect(dbname=dbname)
     c = db.cursor()
@@ -58,6 +46,8 @@ def mostPopularArticles():
 
 # Task 2
 def mostPopularAuthors():
+    '''Prints out the 4 most popular authors of all time.'''
+
     # Connect to the database
     db = psycopg2.connect(dbname=dbname)
     c = db.cursor()
@@ -95,6 +85,8 @@ def mostPopularAuthors():
 
 # Task 3
 def failPercentage():
+    '''Prints out on which  more than 1% of requests lead to errors?'''
+
     # Connect to the database
     db = psycopg2.connect(dbname=dbname)
     c = db.cursor()
