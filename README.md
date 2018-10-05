@@ -21,7 +21,7 @@ In order to run the queries, 3 views must be created in the __news__ database be
 ### 1. Log into the database
 
 ```
-$ psql news
+ psql news
 ```
 
 ### 2. Creating the views
@@ -32,11 +32,11 @@ This view aggregates the "404 NOT FOUND" status codes per day from the log table
 
 RUN THIS IN THE TERMINAL: 
 ```
-$ CREATE VIEW errors AS
-$ SELECT time::date, count(status) as not_found
-$ FROM log
-$ WHERE status = '404 NOT FOUND'
-$ GROUP BY time::date
+CREATE VIEW errors AS
+SELECT time::date, count(status) as not_found
+FROM log
+WHERE status = '404 NOT FOUND'
+GROUP BY time::date
 ```
 
 #### 2.2. **total_hits** views
@@ -45,10 +45,10 @@ This view aggregates all the hits on a day per day basis.
 
 RUN THIS IN THE TERMINAL: 
 ```
-$ CREATE VIEW total_hits AS
-$ SELECT time::date, count(status) as hits
-$ FROM log
-$ GROUP BY time::date;
+CREATE VIEW total_hits AS
+SELECT time::date, count(status) as hits
+FROM log
+GROUP BY time::date;
 ```
 
 #### 2.3. **error_stats** view
@@ -57,18 +57,18 @@ This view combines the previous views (errors and total_hits) to calculate the p
 
 RUN THIS IN THE TERMINAL:
 ```
-$ CREATE VIEW error_stats AS
-$ SELECT total_hits.time, total_hits.hits, errors.not_found, round(((not_found/hits::decimal)*100), 1) as perc
-$ FROM total_hits, errors
-$ WHERE total_hits.time = errors.time
-$ ORDER BY not_found DESC;
+CREATE VIEW error_stats AS
+SELECT total_hits.time, total_hits.hits, errors.not_found, round(((not_found/hits::decimal)*100), 1) as perc
+FROM total_hits, errors
+WHERE total_hits.time = errors.time
+ORDER BY not_found DESC;
 ```
 
 ## Running the script
 
 When all the prerequisite are fulfilled you can simply run the script like so:
 ```
-$ python logs-analysis.py 
+python logs-analysis.py 
 ```
 
 ## Under the hood
