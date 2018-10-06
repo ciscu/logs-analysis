@@ -20,7 +20,7 @@ There are 2 ways to run this program:
 
 After satisfying all the prerequisites addressed below, you can follow these steps:
 
-#### 1.1 Log into the VM
+#### 1.1 Logging into the VM
 
 ##### 1.1.1 Start up the VM
 by going into the `/vagrant` directory of the vm folder
@@ -85,7 +85,7 @@ vagrant@vagrant:~$ psql -d news -f newsdata.sql
 ```
 ### 2.3 Views
 
-In order to run some of the queries 3 views must be created.
+In order to run some of the queries we need to create 3 views.
 
 #### 2.3.1 **errors** view
 
