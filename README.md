@@ -15,7 +15,10 @@ Here is a list of what is needed in order to run log-analysis.py.
 
 ### Software
 
-#### Using the Vagrant VM
+#### Using the Vagrant Virtual Machine
+##### Instalation
+1. Download [vagrant](https://www.vagrantup.com/downloads.html)
+2. Download the vagrant configuration file 
 
 #### Manual setup
 
