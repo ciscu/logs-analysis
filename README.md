@@ -1,3 +1,4 @@
+
 # Logs Analysis
 
 ## introduction
@@ -12,84 +13,85 @@ Output can be found in the **output.txt** file.
 ## Usage
 
 There are 2 ways to run this program:
-1. Using the vagrant VM.
+1. Running the script using the Vagrant VM.
 2. Installing all the dependencies locally.
 
-### Using the vagrant VM.
+#### 1. Running the script using the Vagrant VM.
 
-After satisfying all the prerequisites. You can follow these steps:
+After satisfying all the prerequisites addressed below, you can follow these steps:
 
-#### Logging in
+##### 1.1 Log into the VM
 
-1. Start up the VM by going into the `/vagrant directory` of the vm folder and type following command:
+###### 1.1.1 Start up the VM
+by going into the `/vagrant` directory of the vm folder
+and type following command:
 ```
-vagrant up
+Vagrant up
 ```
-2. If the vm is started up, in the same vagrant sub directory use the following command:
-```
-vagrant ssh
-```
+If this is the first time you run this command it can take some time.
 
-This 
+###### 1.1.2 Connect to the VM
+By typing the following command in the same `/vagrant`subdirectory:
+```
+Vagrant ssh
+```
+This will log your terminal in the running VM
+It should look like this and your in your terminal:
+```
+vagrant@vagrant:~$
+```
+##### 1.2 Running the script
+
+When logged in the VM run change directory to `/vagrant` and run:
+```
+python log-analysis.py
+```
+This will print the output as described above.
+
 
 ## Prerequisites
 
-Here is a list of what is needed in order to run log-analysis.py.
+##### 2.1 Downloading the nessecary files
+2.1.1. Download and install [Vagrant](https://www.Vagrantup.com/downloads.html)          
+2.1.2. Download and install [Virtualbox](https://www.virtualbox.org/wiki/Downloads)      
+2.1.3 Download and unzip the Vagrant configuration files.
 
-### Software
-
-#### Using the Vagrant Virtual Machine
-
-##### Installation
-
-1. Download and install [vagrant].(https://www.vagrantup.com/downloads.html)
-2. Download and install [Virtualbox].(https://www.virtualbox.org/wiki/Downloads)
-3. Download and unzip the vagrant configuration files.
-
-#### Logging in
-
-1. Start up the VM by going into the `/vagrant` sub directory of the vagrant folder and type following command:
+##### 2.2 Setting up the VM
+Like discribed in step 1.1.2.
+In the terminal navigate to  `/vagrant` subdirectory of the VM folder
+and type following command:
 ```
-vagrant up
+Vagrant up
 ```
-2. If the vm is started up, in the same vagrant sub directory use the following command:
+This will download and install all the nessecary dependencies.
+
+###### 2.3 Connect to the VM
+By typing the following command in the same `/vagrant`subdirectory:
 ```
-vagrant ssh
-```
-This will log you in to the virtual machine
-
-#### Setting up the database
-
-While logged in the vagrant vm use the following syntax 
-
-#### Manual setup
-
-The script requires following software to be installed:
-* Python 2.7
-* PostgreSQL
-
-### Importing the database
-
-If you have not imported the database in PostgreSQL run this code in your terminal:
-```
-psql -d newsdata.sql
+Vagrant ssh
 ```
 
-### Connecting to the database
+It should look like this and your in your terminal:
 ```
- psql news
+vagrant@vagrant:~$
 ```
+##### 2.4 Configuring the database
 
+Before running the script we have to populate the database tables with some entries.
 
-### Views
+To do this run the following command:
+```
+vagrant@vagrant:~$ psql -d news -f newsdata.sql
+```
+##### 2.3 Views
 
 In order to run some of the queries 3 views must be created.
 
-#### **errors** view
+###### 2.3.1 **errors** view
 
 This view aggregates the "404 NOT FOUND" status codes per day from the log table.
 
-RUN THIS IN THE TERMINAL: 
+RUN THIS IN THE TERMINAL:
 ```
 CREATE VIEW errors AS
 SELECT time::date, count(status) as not_found
@@ -98,11 +100,11 @@ WHERE status = '404 NOT FOUND'
 GROUP BY time::date
 ```
 
-#### **total_hits** views
+###### 2.3.2 **total_hits** views
 
 This view aggregates all the hits on a day per day basis.
 
-RUN THIS IN THE TERMINAL: 
+RUN THIS IN THE TERMINAL:
 ```
 CREATE VIEW total_hits AS
 SELECT time::date, count(status) as hits
@@ -110,7 +112,7 @@ FROM log
 GROUP BY time::date;
 ```
 
-#### **error_stats** view
+###### 2.3.3 **error_stats** view
 
 This view combines the previous views (errors and total_hits) to calculate the percentage of failed attempts to reach a page.
 
@@ -122,5 +124,3 @@ FROM total_hits, errors
 WHERE total_hits.time = errors.time
 ORDER BY not_found DESC;
 ```
-
-
