@@ -9,6 +9,29 @@ Based on the data in the __news__ database it will output following analytics:
 
 Output can be found in the **output.txt** file.
 
+## Usage
+
+There are 2 ways to run this program:
+1. Using the vagrant VM.
+2. Installing all the dependencies locally.
+
+### Using the vagrant VM.
+
+After satisfying all the prerequisites. You can follow these steps:
+
+#### Logging in
+
+1. Start up the VM by going into the `/vagrant directory` of the vm folder and type following command:
+```
+vagrant up
+```
+2. If the vm is started up, in the same vagrant sub directory use the following command:
+```
+vagrant ssh
+```
+
+This 
+
 ## Prerequisites
 
 Here is a list of what is needed in order to run log-analysis.py.
@@ -16,9 +39,28 @@ Here is a list of what is needed in order to run log-analysis.py.
 ### Software
 
 #### Using the Vagrant Virtual Machine
-##### Instalation
-1. Download [vagrant](https://www.vagrantup.com/downloads.html)
-2. Download the vagrant configuration file 
+
+##### Installation
+
+1. Download and install [vagrant].(https://www.vagrantup.com/downloads.html)
+2. Download and install [Virtualbox].(https://www.virtualbox.org/wiki/Downloads)
+3. Download and unzip the vagrant configuration files.
+
+#### Logging in
+
+1. Start up the VM by going into the `/vagrant` sub directory of the vagrant folder and type following command:
+```
+vagrant up
+```
+2. If the vm is started up, in the same vagrant sub directory use the following command:
+```
+vagrant ssh
+```
+This will log you in to the virtual machine
+
+#### Setting up the database
+
+While logged in the vagrant vm use the following syntax 
 
 #### Manual setup
 
@@ -37,7 +79,7 @@ psql -d newsdata.sql
 ```
  psql news
 ```
-### Connecting to the database
+
 
 ### Views
 
