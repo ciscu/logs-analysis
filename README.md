@@ -15,12 +15,13 @@ Output can be found in the **output.txt** file.
 ## Usage
 
 In order to run the script you need to download and do some database configuration
-first. These steps are described in the **prerequisites** section.
+first.
+These steps are described in the **prerequisites** section.
 
 Once all the prerequisites are satisfied you can run the script by following
 these steps:
 
-##### Start up the VM
+##### Starting up the VM
 by going into the `/vagrant` directory of the vm folder
 and type following command:
 ```
@@ -29,11 +30,11 @@ Vagrant up
 
 ##### Connect to the VM
 Logging in the to the vm is really straight forward.
-type the following command in the  `/vagrant`subdirectory:
+Type the following command in the  `/vagrant`subdirectory:
 ```
 Vagrant ssh
 ```
-This will log you in the VM
+This will log you in the VM.  
 Your terminal prompt should look a this:
 ```
 vagrant@vagrant:~$
@@ -77,7 +78,6 @@ vagrant@vagrant:~$
 ### Configuring the database
 
 Before running the script we have to populate the database tables with some entries.
-
 To do this run the following command in the VM:
 ```
 vagrant@vagrant:~$ psql -d news -f newsdata.sql
