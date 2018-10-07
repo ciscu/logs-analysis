@@ -1,9 +1,9 @@
 
 # Logs Analysis
 
-## introduction
+## Introduction
 
-This program runs some analysis queries to the fictional **news** database and prints it out to the terminal.
+This program runs some analysis queries from data in the fictional **news** database and prints it out to the terminal.
 
 Based on the data in the __news__ database it will output following analytics:
 1. The 3 most popular articles.
