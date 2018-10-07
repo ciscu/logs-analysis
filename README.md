@@ -3,6 +3,8 @@
 
 ## introduction
 
+This program runs some analysis queries to the fictional **news** database and prints it out to the terminal.
+
 Based on the data in the __news__ database it will output following analytics:
 1. The 3 most popular articles.
 2. The 4 most popular authors.
@@ -12,61 +14,58 @@ Output can be found in the **output.txt** file.
 
 ## Usage
 
-There are 2 ways to run this program:
-1. Running the script using the Vagrant VM.
-2. Installing all the dependencies locally.
+In order to run the script you need to download and do some database configuration
+first. These steps are described in the **prerequisites** section.
 
-### 1. Running the script using the Vagrant VM.
+Once all the prerequisites are satisfied you can run the script by following
+these steps:
 
-After satisfying all the prerequisites addressed below, you can follow these steps:
-
-#### 1.1 Logging into the VM
-
-##### 1.1.1 Start up the VM
+##### Start up the VM
 by going into the `/vagrant` directory of the vm folder
 and type following command:
 ```
 Vagrant up
 ```
-If this is the first time you run this command it can take some time.
 
-##### 1.1.2 Connect to the VM
-By typing the following command in the same `/vagrant`subdirectory:
+##### Connect to the VM
+Logging in the to the vm is really straight forward.
+type the following command in the  `/vagrant`subdirectory:
 ```
 Vagrant ssh
 ```
-This will log your terminal in the running VM
-It should look like this and your in your terminal:
+This will log you in the VM
+Your terminal prompt should look a this:
 ```
 vagrant@vagrant:~$
 ```
-#### 1.2 Running the script
+#### Running the script
 
 When logged in the VM run change directory to `/vagrant` and run:
 ```
 python log-analysis.py
 ```
-This will print the output as described above.
+This will print the output as in the **output.txt** file.
 
 
 ## Prerequisites
 
-### 2.1 Downloading the nessecary files
-2.1.1. Download and install [Vagrant](https://www.Vagrantup.com/downloads.html)          
-2.1.2. Download and install [Virtualbox](https://www.virtualbox.org/wiki/Downloads)      
-2.1.3 Download and unzip the Vagrant configuration files.
+### Downloading the nessecary files
+Download and install [Vagrant](https://www.Vagrantup.com/downloads.html)          
+Download and install [Virtualbox](https://www.virtualbox.org/wiki/Downloads)      
+Download and unzip the Vagrant configuration files.
 
-### 2.2 Setting up the VM
-Like discribed in step 1.1.2.
+### Setting up the VM the for first time
+
 In the terminal navigate to  `/vagrant` subdirectory of the VM folder
 and type following command:
 ```
 Vagrant up
 ```
-This will download and install all the nessecary dependencies.
+This will download and install all the necessary dependencies.
+It can take a couple of minutes.
 
-### 2.3 Connect to the VM
-By typing the following command in the same `/vagrant`subdirectory:
+### Connect to the VM
+By typing the following command in the same `/vagrant` subdirectory:
 ```
 Vagrant ssh
 ```
@@ -75,19 +74,19 @@ It should look like this and your in your terminal:
 ```
 vagrant@vagrant:~$
 ```
-### 2.4 Configuring the database
+### Configuring the database
 
 Before running the script we have to populate the database tables with some entries.
 
-To do this run the following command:
+To do this run the following command in the VM:
 ```
 vagrant@vagrant:~$ psql -d news -f newsdata.sql
 ```
-### 2.3 Views
+### Views
 
 In order to run some of the queries we need to create 3 views.
 
-#### 2.3.1 **errors** view
+#### **errors** view
 
 This view aggregates the "404 NOT FOUND" status codes per day from the log table.
 
@@ -100,7 +99,7 @@ WHERE status = '404 NOT FOUND'
 GROUP BY time::date
 ```
 
-#### 2.3.2 **total_hits** views
+#### **total_hits** views
 
 This view aggregates all the hits on a day per day basis.
 
@@ -112,7 +111,7 @@ FROM log
 GROUP BY time::date;
 ```
 
-#### 2.3.3 **error_stats** view
+#### **error_stats** view
 
 This view combines the previous views (errors and total_hits) to calculate the percentage of failed attempts to reach a page.
 
