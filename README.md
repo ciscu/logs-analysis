@@ -21,14 +21,14 @@ These steps are described in the **prerequisites** section.
 Once all the prerequisites are satisfied you can run the script by following
 these steps:
 
-##### Starting up the VM
+### Starting up the VM
 by going into the `/vagrant` directory of the vm folder
 and type following command:
 ```
 Vagrant up
 ```
 
-##### Connect to the VM
+### Connect to the VM
 Logging in the to the vm is really straight forward.
 Type the following command in the  `/vagrant`subdirectory:
 ```
@@ -39,7 +39,7 @@ Your terminal prompt should look a this:
 ```
 vagrant@vagrant:~$
 ```
-#### Running the script
+### Running the script
 
 When logged in the VM run change directory to `/vagrant` and run:
 ```
